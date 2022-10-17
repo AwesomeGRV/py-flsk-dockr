@@ -1,0 +1,41 @@
+name: Py Doc
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+
+  workflow_dispatch:
+  
+
+
+jobs:
+ 
+  build:
+    
+    runs-on: ubuntu-latest
+
+    
+    steps:
+      
+      - uses: actions/checkout@v2
+
+      - name: "Configure AWS Credentials" 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: 
+          aws-secret-access-key: 
+          aws-region: us-east-2        
+          
+      - name: Amazon ECR "Login" Action for GitHub Actions 
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registries: 
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        run: |
+          docker build -t awesomegrv/py-flsk-dockr .
+          docker tag 
+          docker push 
