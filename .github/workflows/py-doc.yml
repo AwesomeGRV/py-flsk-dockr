@@ -27,7 +27,7 @@ jobs:
         with:
           aws-access-key-id: 
           aws-secret-access-key: 
-          aws-region: us-east-2        
+          aws-region: us-east-1        
           
       - name: Amazon ECR "Login" Action for GitHub Actions 
         uses: aws-actions/amazon-ecr-login@v1
