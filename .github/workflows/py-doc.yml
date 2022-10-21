@@ -1,35 +1,26 @@
-name: Py Doc
+name: Deploy to ECR
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-    
-  
-jobs:
  
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+  push:
+    branches: [ master ]
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: us-east-1
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}      
-          
-      - name: Amazon ECR "Login" Action for GitHub Actions 
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registries: 522838200446
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        run: |
-          docker build -t awesomegrv/py-flsk-dockr .
-          docker tag awesomegrv/py-flsk-dockr:latest 522838200446.dkr.ecr.us-east-1.amazonaws.com/demogrvecr:latest
-          docker push 522838200446.dkr.ecr.us-east-1.amazonaws.com/demogrvecr:latest
+jobs:
+  
+  build:
+    
+    name: Build Image
+    runs-on: ubuntu-latest
+
+   
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
