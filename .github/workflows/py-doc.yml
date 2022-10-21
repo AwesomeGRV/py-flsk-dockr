@@ -33,6 +33,6 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       run: |
-          docker build -t awesomegrv/py-flsk-dockr.
+          docker build -t awesomegrv/py-flsk-dockr .
           docker tag awesomegrv/py-flsk-dockr:latest 522838200446.dkr.ecr.us-east-1.amazonaws.com/demogrvecr:latest
           docker push 522838200446.dkr.ecr.us-east-1.amazonaws.com/demogrvecr:latest
